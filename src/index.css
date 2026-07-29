@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-night-900 text-slate-200 font-sans antialiased;
+  background-image: radial-gradient(ellipse at top, rgba(99, 102, 241, 0.12), transparent 55%);
+}
+
+::selection {
+  @apply bg-indigo-500/40 text-white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #0c0c1f;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6366f1, #22d3ee);
+  border-radius: 8px;
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/[0.05] backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.45)];
+  }
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 font-semibold text-white
+      bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-400 bg-[length:200%_auto]
+      transition-all duration-300 hover:bg-right hover:shadow-[0_0_28px_rgba(99,102,241,0.55)]
+      active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 font-medium text-slate-300
+      border border-white/10 bg-white/[0.04] hover:bg-white/[0.09] hover:text-white transition-all duration-200 active:scale-[0.97];
+  }
+  .input-field {
+    @apply w-full rounded-xl bg-night-800/80 border border-white/10 px-4 py-3 text-slate-100 placeholder-slate-500
+      outline-none transition-all duration-200 focus:border-indigo-400/70 focus:ring-2 focus:ring-indigo-500/25;
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-indigo-400 via-violet-400 to-cyan-300 bg-clip-text text-transparent;
+    padding-bottom: 0.15em; /* cegah descender (p, g, y, j) kepotong oleh bg-clip-text */
+    margin-bottom: -0.15em;
+  }
+  .shimmer-line {
+    background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.14) 50%, rgba(255,255,255,0.04) 75%);
+    background-size: 200% 100%;
+    @apply animate-shimmer rounded;
+  }
+  .stripe-bar {
+    background-image: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.18) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.18) 50%,
+      rgba(255, 255, 255, 0.18) 75%,
+      transparent 75%,
+      transparent
+    );
+    background-size: 28px 28px;
+    @apply animate-stripes;
+  }
+
+  /* Kartu dengan border gradient berjalan (conic spin) */
+  .neon-card {
+    @apply relative rounded-2xl p-[1.5px] overflow-hidden;
+  }
+  .neon-card::before {
+    content: "";
+    @apply absolute inset-[-150%];
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      rgba(99, 102, 241, 0.9) 60deg,
+      rgba(34, 211, 238, 0.9) 120deg,
+      transparent 180deg,
+      transparent 360deg
+    );
+    animation: border-spin 4.5s linear infinite;
+  }
+  .neon-card > * {
+    @apply relative rounded-2xl;
+  }
+}
